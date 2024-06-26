@@ -8,7 +8,7 @@ export const loadPokedex = createAction(
 
 export const loadPokedexSuccess = createAction(
   '[Pokedex] Load Pokedex Success',
-  props<{pokedex: Result[]}>()
+  props<{pokedex: Pokemon[]}>()
 );
 
 export const loadPokedexError = createAction(

@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {loadPokedex} from "../store/pokedex/pokedex.actions";
 import {Observable} from "rxjs";
-import {Result} from "../models/pokedex.model";
 import {pokedexError, pokedexList, pokedexLoading} from "../store/pokedex/pokedex.selectors";
+import {Pokemon} from "../models/pokemon.model";
 
 @Component({
   selector: 'app-pokedex',
@@ -11,7 +11,7 @@ import {pokedexError, pokedexList, pokedexLoading} from "../store/pokedex/pokede
   styleUrl: './pokedex.component.css'
 })
 export class PokedexComponent implements OnInit {
-  pokedex$!: Observable<Result[]>;
+  pokedex$!: Observable<Pokemon[]>;
   loading$!: Observable<boolean>;
   error$!: Observable<null | string>;
 

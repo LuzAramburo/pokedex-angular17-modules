@@ -12,7 +12,7 @@ export class PokedexEffects {
     switchMap(() =>
       this.pokedexService.getPokedex().pipe(
         tap((response) => console.log(response)),
-        map(response => loadPokedexSuccess({pokedex: response})),
+        map(pokedex => loadPokedexSuccess({pokedex})),
         catchError((error) => {
           console.error(error)
           return of(loadPokedexError({message: 'Something went wrong fetching the pokedex. Please try again later.'}))

@@ -1,12 +1,11 @@
 import {createReducer, on} from "@ngrx/store";
 import {Pokemon} from "../../models/pokemon.model";
 import {loadPokedex, loadPokedexError, loadPokedexSuccess} from "./pokedex.actions";
-import {Result} from "../../models/pokedex.model";
 
 export interface PokedexState {
   loading: boolean,
   error: null | string,
-  pokedex: Result[]
+  pokedex: Pokemon[]
 }
 
 const initialState: PokedexState = {
