@@ -1,18 +1,29 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import {pokedexReducer} from "./store/pokedex/pokedex.reducer";
+import {PokedexEffects} from "./store/pokedex/pokedex.effects";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {HttpClientModule} from "@angular/common/http";
+import {PokedexModule} from "./pokedex/pokedex.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({pokedex: pokedexReducer}, {}),
+    EffectsModule.forRoot([PokedexEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    HttpClientModule,
+    PokedexModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

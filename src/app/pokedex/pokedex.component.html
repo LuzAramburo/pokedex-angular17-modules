@@ -1,0 +1,9 @@
+<div *ngIf="loading$ | async">
+  <p>Loading pokedex...</p>
+</div>
+<div *ngIf="!(loading$ | async) && (error$ | async) as errorMessage">
+  <p>{{errorMessage}}</p>
+</div>
+<div *ngIf="!(loading$ | async) && (pokedex$ | async) as pokedex">
+  <div *ngFor="let pokemon of pokedex">{{pokemon.name}}</div>
+</div>
