@@ -1,4 +1,4 @@
-<a class="item" href="#">
+<a class="item" [routerLink]="['/pokedex', pokemon.id]" (click)="onSelectPokemon(pokemon)">
   <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
   <div>{{ pokemon.name }}</div>
   <div class="types">

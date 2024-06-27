@@ -11,7 +11,6 @@ export class PokedexEffects {
     ofType(loadPokedex),
     switchMap(() =>
       this.pokedexService.getPokedex().pipe(
-        tap((response) => console.log(response)),
         map(pokedex => loadPokedexSuccess({pokedex})),
         catchError((error) => {
           console.error(error)

@@ -1,6 +1,5 @@
 import {createAction, props} from "@ngrx/store";
 import {Pokemon} from "../../models/pokemon.model";
-import {Result} from "../../models/pokedex.model";
 
 export const loadPokedex = createAction(
   '[Pokedex] Load Pokedex',
@@ -14,4 +13,13 @@ export const loadPokedexSuccess = createAction(
 export const loadPokedexError = createAction(
   '[Pokedex] Load Pokedex Error',
   props<{message: string}>()
+)
+
+export const selectPokemon = createAction(
+  '[Pokedex] Select pokemon',
+  props<{pokemon: Pokemon}>()
+)
+
+export const clearSelectedPokemon = createAction(
+  '[Pokedex] Clear selected pokemon',
 )

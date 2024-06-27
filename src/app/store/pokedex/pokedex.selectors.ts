@@ -17,3 +17,8 @@ export const pokedexError = createSelector(
   pokedexSelector,
   state => state.error
 )
+
+export const selectedPokemon = createSelector(
+  pokedexSelector,
+  state => state.selectedPokemon
+)

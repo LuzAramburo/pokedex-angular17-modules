@@ -1,17 +1,26 @@
 import {createReducer, on} from "@ngrx/store";
 import {Pokemon} from "../../models/pokemon.model";
-import {loadPokedex, loadPokedexError, loadPokedexSuccess} from "./pokedex.actions";
+import {
+  clearSelectedPokemon,
+  loadPokedex,
+  loadPokedexError,
+  loadPokedexSuccess,
+  selectPokemon
+} from "./pokedex.actions";
+import {state} from "@angular/animations";
 
 export interface PokedexState {
   loading: boolean,
   error: null | string,
-  pokedex: Pokemon[]
+  pokedex: Pokemon[],
+  selectedPokemon: Pokemon | null
 }
 
 const initialState: PokedexState = {
   loading: true,
   error: null,
   pokedex: [],
+  selectedPokemon: null
   // TODO types and colors https://pokeapi.co/api/v2/type/
 }
 
@@ -31,5 +40,13 @@ export const pokedexReducer = createReducer(
     ...state,
     error: message,
     loading: false,
+  })),
+  on(selectPokemon, (state, {pokemon}) => ({
+    ...state,
+    selectedPokemon: pokemon,
+  })),
+  on(clearSelectedPokemon, (state) => ({
+    ...state,
+    selectedPokemon: null,
   }))
 )

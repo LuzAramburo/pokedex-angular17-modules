@@ -1,0 +1,14 @@
+<a routerLink="/pokedex">Go back</a>
+<div *ngIf="pokemon$ | async as pokemon; else noSelectedPokemon">
+  <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
+  <div>{{ pokemon.name }}</div>
+  <div class="types">
+    <div *ngFor="let typeSlot of pokemon.types">
+      {{ typeSlot.type.name }}
+    </div>
+  </div>
+</div>
+<ng-template #noSelectedPokemon>
+  <!--  TODO: fetch pokemon if there's none selected-->
+  <div>Something went wrong. Please go back and select a Pokemon.</div>
+</ng-template>

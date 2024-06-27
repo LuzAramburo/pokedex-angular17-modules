@@ -10,6 +10,7 @@ import {PokedexEffects} from "./store/pokedex/pokedex.effects";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {HttpClientModule} from "@angular/common/http";
 import {PokedexModule} from "./pokedex/pokedex.module";
+import {PokemonDetailsModule} from "./pokemon-details/pokemon-details.module";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {PokedexModule} from "./pokedex/pokedex.module";
     EffectsModule.forRoot([PokedexEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     HttpClientModule,
-    PokedexModule
+    PokedexModule,
+    PokemonDetailsModule
   ],
   bootstrap: [AppComponent]
 })
