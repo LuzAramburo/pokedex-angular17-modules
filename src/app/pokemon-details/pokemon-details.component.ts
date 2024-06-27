@@ -29,7 +29,7 @@ export class PokemonDetailsComponent implements OnInit {
 
     this.pokemon$.subscribe(
       (pokemon) => {
-        const url = `https://pokeapi.co/api/v2/pokemon/${this.route.snapshot.params['pokemonId']}`
+        const url = `https://pokeapi.co/api/v2/pokemon/${this.route.snapshot.params['pokemonId']}/`
         if (!pokemon) this.store.dispatch(loadPokemonDetails({url}))
       }
     )

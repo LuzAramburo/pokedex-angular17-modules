@@ -7,7 +7,6 @@ import {
   loadPokedexSuccess, loadPokemonDetails, loadPokemonDetailsError, loadPokemonDetailsSuccess,
   selectPokemon
 } from "./pokedex.actions";
-import {state} from "@angular/animations";
 
 export interface PokedexState {
   loading: boolean,
@@ -16,10 +15,13 @@ export interface PokedexState {
   selectedPokemon: Pokemon | null
 }
 
+const pokedexCache = window.localStorage.getItem("pokedex");
+const initialPokedexState = pokedexCache ? JSON.parse(pokedexCache) : '';
+
 const initialState: PokedexState = {
   loading: true,
   error: null,
-  pokedex: [],
+  pokedex: initialPokedexState ?? [],
   selectedPokemon: null
   // TODO types and colors https://pokeapi.co/api/v2/type/
 }
@@ -31,11 +33,14 @@ export const pokedexReducer = createReducer(
     loading: true,
     error: null,
   })),
-  on(loadPokedexSuccess, (state, {pokedex}) => ({
-    ...state,
-    loading: false,
-    pokedex
-  })),
+  on(loadPokedexSuccess, (state, {pokedex}) => {
+    window.localStorage.setItem("pokedex", JSON.stringify(pokedex));
+    return {
+      ...state,
+      loading: false,
+      pokedex
+    }
+  }),
   on(loadPokedexError, (state, {message}) => ({
     ...state,
     error: message,

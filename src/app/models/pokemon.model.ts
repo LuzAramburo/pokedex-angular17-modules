@@ -1,4 +1,5 @@
 export interface Pokemon {
+  url: string;
   abilities: Ability[];
   base_experience: number;
   cries: Cries;

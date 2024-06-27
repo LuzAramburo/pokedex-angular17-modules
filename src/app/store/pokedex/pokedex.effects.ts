@@ -5,41 +5,53 @@ import {
   loadPokedex,
   loadPokedexError,
   loadPokedexSuccess,
-  loadPokemonDetails, loadPokemonDetailsSuccess,
+  loadPokemonDetails,
+  loadPokemonDetailsSuccess,
 } from "./pokedex.actions";
-import {catchError, map, of, switchMap, tap} from "rxjs";
+import {catchError, map, of, switchMap, withLatestFrom} from "rxjs";
+import {select, Store} from "@ngrx/store";
+import {pokedexList} from "./pokedex.selectors";
 
 
 @Injectable()
 export class PokedexEffects {
   loadPokedex$ = createEffect(() => this.actions$.pipe(
     ofType(loadPokedex),
-    switchMap(() =>
-      this.pokedexService.getPokedex().pipe(
-        map(pokedex => loadPokedexSuccess({pokedex})),
-        catchError((error) => {
-          console.error(error)
-          return of(loadPokedexError({message: 'Something went wrong fetching the pokedex. Please try again later.'}))
-        })
-      )
+    withLatestFrom(this.store.pipe(select(pokedexList))),
+    switchMap(([_, pokedex]) => {
+      if (pokedex.length > 0) return of(loadPokedexSuccess({pokedex}))
+      else return this.pokedexService.getPokedex().pipe(
+          map(pokedex => loadPokedexSuccess({pokedex})),
+          catchError((error) => {
+            console.error(error)
+            return of(loadPokedexError({message: 'Something went wrong fetching the pokedex. Please try again later.'}))
+          })
+        )
+      }
     )
   ))
 
   loadPokemonDetails$ = createEffect(() => this.actions$.pipe(
     ofType(loadPokemonDetails),
-    switchMap(({url}) =>
-    this.pokedexService.getPokemonDetails(url).pipe(
-      map(pokemon => loadPokemonDetailsSuccess({pokemon})),
-      catchError(error => {
-        console.error(error)
-        return of(loadPokedexError({message: 'Something went wrong fetching the pokemon details. Please try again later.'}))
-      })
-    ))
+    withLatestFrom(this.store.select(pokedexList)),
+    switchMap(([{url}, state]) => {
+      const findPokemon = state.find(pokemon => pokemon.url === url)
+      console.log(state, findPokemon)
+      if (findPokemon) return of(loadPokemonDetailsSuccess({pokemon: findPokemon}))
+      else return this.pokedexService.getPokemonDetails(url).pipe(
+        map(pokemon => loadPokemonDetailsSuccess({pokemon})),
+        catchError(error => {
+          console.error(error)
+          return of(loadPokedexError({message: 'Something went wrong fetching the pokemon details. Please try again later.'}))
+        })
+      )
+    })
   ))
 
   constructor(
     private actions$: Actions,
-    private pokedexService: PokedexService
+    private pokedexService: PokedexService,
+    protected store: Store
   ) {
   }
 }
