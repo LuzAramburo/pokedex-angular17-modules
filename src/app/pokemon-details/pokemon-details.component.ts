@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {selectPokemon} from "../store/pokedex/pokedex.actions";
+import {loadPokemonDetails, selectPokemon} from "../store/pokedex/pokedex.actions";
 import {Observable} from "rxjs";
 import {Pokemon} from "../models/pokemon.model";
-import {selectedPokemon} from "../store/pokedex/pokedex.selectors";
+import {pokedexError, pokedexLoading, selectedPokemon} from "../store/pokedex/pokedex.selectors";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-pokemon-details',
@@ -12,13 +13,25 @@ import {selectedPokemon} from "../store/pokedex/pokedex.selectors";
 })
 export class PokemonDetailsComponent implements OnInit {
   pokemon$!: Observable<Pokemon | null>;
+  loading$!: Observable<boolean>;
+  error$!: Observable<string | null>;
 
   constructor(
-    private store: Store
+    private store: Store,
+    protected route: ActivatedRoute,
   ) {
   }
 
   ngOnInit() {
     this.pokemon$ = this.store.select(selectedPokemon)
+    this.loading$ = this.store.select(pokedexLoading)
+    this.error$ = this.store.select(pokedexError)
+
+    this.pokemon$.subscribe(
+      (pokemon) => {
+        const url = `https://pokeapi.co/api/v2/pokemon/${this.route.snapshot.params['pokemonId']}`
+        if (!pokemon) this.store.dispatch(loadPokemonDetails({url}))
+      }
+    )
   }
 }

@@ -7,17 +7,32 @@ export const loadPokedex = createAction(
 
 export const loadPokedexSuccess = createAction(
   '[Pokedex] Load Pokedex Success',
-  props<{pokedex: Pokemon[]}>()
+  props<{ pokedex: Pokemon[] }>()
 );
 
 export const loadPokedexError = createAction(
   '[Pokedex] Load Pokedex Error',
-  props<{message: string}>()
+  props<{ message: string }>()
+)
+
+export const loadPokemonDetails = createAction(
+  '[Pokedex] Load pokemon Details',
+  props<{ url: string }>()
+)
+
+export const loadPokemonDetailsSuccess = createAction(
+  '[Pokedex] Load pokemon Details Success',
+  props<{ pokemon: Pokemon }>()
+)
+
+export const loadPokemonDetailsError = createAction(
+  '[Pokedex] Load pokemon Details Error',
+  props<{ message: string }>()
 )
 
 export const selectPokemon = createAction(
   '[Pokedex] Select pokemon',
-  props<{pokemon: Pokemon}>()
+  props<{ pokemon: Pokemon }>()
 )
 
 export const clearSelectedPokemon = createAction(

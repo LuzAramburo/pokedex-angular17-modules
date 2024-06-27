@@ -4,7 +4,7 @@ import {
   clearSelectedPokemon,
   loadPokedex,
   loadPokedexError,
-  loadPokedexSuccess,
+  loadPokedexSuccess, loadPokemonDetails, loadPokemonDetailsError, loadPokemonDetailsSuccess,
   selectPokemon
 } from "./pokedex.actions";
 import {state} from "@angular/animations";
@@ -37,6 +37,21 @@ export const pokedexReducer = createReducer(
     pokedex
   })),
   on(loadPokedexError, (state, {message}) => ({
+    ...state,
+    error: message,
+    loading: false,
+  })),
+  on(loadPokemonDetails , (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(loadPokemonDetailsSuccess, (state, {pokemon}) => ({
+    ...state,
+    loading: false,
+    selectedPokemon: pokemon,
+  })),
+  on(loadPokemonDetailsError, (state, {message}) => ({
     ...state,
     error: message,
     loading: false,
