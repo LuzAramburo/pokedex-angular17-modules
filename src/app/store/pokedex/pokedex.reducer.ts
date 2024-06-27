@@ -11,12 +11,13 @@ export interface PokedexState {
 const initialState: PokedexState = {
   loading: true,
   error: null,
-  pokedex: []
+  pokedex: [],
+  // TODO types and colors https://pokeapi.co/api/v2/type/
 }
 
 export const pokedexReducer = createReducer(
   initialState,
-  on(loadPokedex , (state, action) => ({
+  on(loadPokedex , (state) => ({
     ...state,
     loading: true,
     error: null,

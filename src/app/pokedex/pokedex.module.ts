@@ -1,10 +1,12 @@
 import {NgModule} from '@angular/core';
-import {AsyncPipe, CommonModule} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {PokedexComponent} from "./pokedex.component";
+import { PokedexItemComponent } from './pokedex-item/pokedex-item.component';
 
 @NgModule({
   declarations: [
-    PokedexComponent
+    PokedexComponent,
+    PokedexItemComponent
   ],
   imports: [
     CommonModule

@@ -15,7 +15,7 @@ export class PokedexService {
   }
 
   getPokedex() {
-    return this.httpClient.get<PokedexResponse>('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0').pipe(
+    return this.httpClient.get<PokedexResponse>('https://pokeapi.co/api/v2/pokemon?limit=20&offset=121').pipe(
       map(response => response.results),
       mergeMap(pokedexList =>
         combineLatest(pokedexList.map(pokemon =>

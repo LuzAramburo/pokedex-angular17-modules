@@ -2,8 +2,11 @@
   <p>Loading pokedex...</p>
 </div>
 <div *ngIf="!(loading$ | async) && (error$ | async) as errorMessage">
-  <p>{{errorMessage}}</p>
+  <p>{{ errorMessage }}</p>
 </div>
+
 <div *ngIf="!(loading$ | async) && (pokedex$ | async) as pokedex">
-  <div *ngFor="let pokemon of pokedex">{{pokemon.name}}</div>
+  <div class="container">
+    <app-pokedex-item *ngFor="let pokemon of pokedex" [pokemon]="pokemon" />
+  </div>
 </div>
