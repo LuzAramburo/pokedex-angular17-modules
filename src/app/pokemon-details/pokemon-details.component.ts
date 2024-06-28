@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {loadPokemonDetails, selectPokemon} from "../store/pokedex/pokedex.actions";
 import {Observable} from "rxjs";
 import {Pokemon} from "../models/pokemon.model";
 import {pokedexError, pokedexLoading, selectedPokemon} from "../store/pokedex/pokedex.selectors";
@@ -27,11 +26,12 @@ export class PokemonDetailsComponent implements OnInit {
     this.loading$ = this.store.select(pokedexLoading)
     this.error$ = this.store.select(pokedexError)
 
-    this.pokemon$.subscribe(
-      (pokemon) => {
-        const url = `https://pokeapi.co/api/v2/pokemon/${this.route.snapshot.params['pokemonId']}/`
-        if (!pokemon) this.store.dispatch(loadPokemonDetails({url}))
-      }
-    )
+    // this.route.data.subscribe if i wanted the data form the resolver
+    // this.pokemon$.subscribe(
+    //   (pokemon) => {
+    //     const url = `https://pokeapi.co/api/v2/pokemon/${this.route.snapshot.params['pokemonId']}/`
+    //     if (!pokemon) this.store.dispatch(loadPokemonDetails({url}))
+    //   }
+    // )
   }
 }
