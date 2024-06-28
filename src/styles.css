@@ -18,3 +18,18 @@ html {
 *, *:before, *:after {
   box-sizing: border-box;
 }
+
+.btn {
+  background-color: var(--color-primary);
+  color: white;
+  opacity: 0.6;
+  padding: .5rem 1rem;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  border: none;
+}
+
+.btn:hover {
+  background-color: var(--color-primary);
+  opacity: 1;
+}
