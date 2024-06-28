@@ -36,7 +36,6 @@ export class PokedexEffects {
     withLatestFrom(this.store.select(pokedexList)),
     switchMap(([{url}, state]) => {
       const findPokemon = state.find(pokemon => pokemon.url === url)
-      console.log(state, findPokemon)
       if (findPokemon) return of(loadPokemonDetailsSuccess({pokemon: findPokemon}))
       else return this.pokedexService.getPokemonDetails(url).pipe(
         map(pokemon => loadPokemonDetailsSuccess({pokemon})),

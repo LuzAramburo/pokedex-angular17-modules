@@ -1,2 +1,8 @@
-<h1>{{title | uppercase}}</h1>
+<div class="navbar">
+  <h1>{{ title | uppercase }}</h1>
+  <nav>
+    <a routerLink="">Home</a>
+    <a [routerLink]="['pokedex','add']">Add Pokemon</a>
+  </nav>
+</div>
 <router-outlet/>

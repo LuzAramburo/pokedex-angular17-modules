@@ -11,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {HttpClientModule} from "@angular/common/http";
 import {PokedexModule} from "./pokedex/pokedex.module";
 import {PokemonDetailsModule} from "./pokemon-details/pokemon-details.module";
+import {AddPokemonModule} from "./add-pokemon/add-pokemon.module";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {PokemonDetailsModule} from "./pokemon-details/pokemon-details.module";
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     HttpClientModule,
     PokedexModule,
-    PokemonDetailsModule
+    PokemonDetailsModule,
+    AddPokemonModule
   ],
   bootstrap: [AppComponent]
 })

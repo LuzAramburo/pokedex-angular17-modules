@@ -1,0 +1,16 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <div class="control-group">
+    <label>Name</label>
+    <input type="text" name="name" ngModel #name="ngModel" required>
+    <div *ngIf="name.touched && name.invalid">Name required</div>
+  </div>
+  <ul>
+    <li>Types</li>
+    <li>National num</li>
+    <li>height</li>
+    <li>weight</li>
+    <li>abilities</li>
+    <li>stats: hp, attack, defense, special-attack,special-defense,speed</li>
+  </ul>
+  <button type="submit" class="btn">Submit</button>
+</form>

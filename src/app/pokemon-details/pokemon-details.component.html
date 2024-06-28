@@ -8,10 +8,36 @@
 <div *ngIf="pokemon$ | async as pokemon">
   <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
   <!--  back, male/female and shiny-->
-  <div>{{ pokemon.name }}</div>
-  <div class="types">
-    <div *ngFor="let typeSlot of pokemon.types">
-      {{ typeSlot.type.name }}
+  <h1>{{ pokemon.name }}</h1>
+
+  <dl>
+    <dt>Types</dt>
+    <dd>
+      <div class="types">
+        <div *ngFor="let typeSlot of pokemon.types">
+          {{ typeSlot.type.name }}
+        </div>
+      </div>
+    </dd>
+    <dt>National Num.</dt>
+    <dd>{{ pokemon.id }}</dd>
+    <dt>Height</dt>
+    <dd>{{ pokemon.height }}</dd>
+    <dt>weight</dt>
+    <dd>{{ pokemon.weight }}</dd>
+    <dt>Abilities</dt>
+    <dd>
+      <div *ngFor="let data of pokemon.abilities">
+        {{data.ability.name}} <span *ngIf="data.is_hidden">(hidden ability)</span>
+      </div>
+    </dd>
+  </dl>
+
+
+  <div>
+    <h2>Stats</h2>
+    <div *ngFor="let data of pokemon.stats">
+      {{ data.stat.name }} - {{ data.base_stat }}
     </div>
   </div>
   <!--  abilities -->

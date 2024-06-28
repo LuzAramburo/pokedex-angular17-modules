@@ -1,0 +1,15 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.navbar h1 {
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  gap: 0.5rem;
+}

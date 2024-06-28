@@ -13,6 +13,7 @@ html {
   "Roboto",
   "Helvetica Neue", Arial, sans-serif,
   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: var(--color-body);
 }
 
 *, *:before, *:after {
@@ -27,6 +28,7 @@ html {
   border-radius: var(--border-radius);
   text-decoration: none;
   border: none;
+  cursor: pointer;
 }
 
 .btn:hover {
