@@ -6,7 +6,7 @@ import {
   loadPokedexError,
   loadPokedexSuccess,
   loadPokemonDetails,
-  loadPokemonDetailsSuccess,
+  loadPokemonDetailsSuccess, loadTypes, loadTypesError, loadTypesSuccess,
 } from "./pokedex.actions";
 import {catchError, map, of, switchMap, withLatestFrom} from "rxjs";
 import {select, Store} from "@ngrx/store";
@@ -45,6 +45,18 @@ export class PokedexEffects {
         })
       )
     })
+  ))
+
+  loadTypes$ = createEffect(() => this.actions$.pipe(
+    ofType(loadTypes),
+    switchMap(() =>
+    this.pokedexService.getTypes().pipe(
+      map(types => loadTypesSuccess({types})),
+      catchError((error) => {
+        console.error(error)
+        return of(loadTypesError({message: 'Something went wrong fetching the pokemon types. Please try again later.'}))
+      })
+    ))
   ))
 
   constructor(

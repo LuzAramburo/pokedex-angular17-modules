@@ -22,3 +22,8 @@ export const selectedPokemon = createSelector(
   pokedexSelector,
   state => state.selectedPokemon
 )
+
+export const typesList = createSelector(
+  pokedexSelector,
+  state => state.types
+)
